@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %} Post: {{ post.slug }}  {% endblock %}
+
+{% block conteudo%}
+{% include 'includes/top.html' %}
+<section data-bs-version="5.1" class="content10 cid-tzVgp39K95" id="content10-1">
+
+    <div class="container">
+        <div class="row justify-content-center border border-ligth">
+            <div class="col-12">
+
+                <h6 class="mbr-section-subtitle mbr-fonts-style mb-4 display-3">
+                    {{ postagem.titulo }}
+                </h6>
+            </div>
+            <div class="col-12">
+                <p class="mbr-text mbr-fonts-style display-9">
+                    Publicado em: {{ postagem.publicado }} por {{ postagem.autor }}
+                </p>
+                <p class="mbr-text mbr-fonts-style display-7">
+                    {{ postagem.corpo|linebreaks }}
+                </p>
+            </div>
+            <div class="mbr-section-btn align-center">
+                    <a class="btn btn-primary display-4"
+                       href="{% url 'enviarpost' postagem.id %}">Enviar...</a>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+
+        <div class="row justify-content-center border border-ligth">
+            <h3 class="align-center mt-2">
+                Comentários
+            </h3>
+            <div class="col-12">
+
+                {% for c in coments %}
+                    <div class="mt-4">
+                        <h8 class="mbr-section-subtitle mbr-fonts-style display-6 ">
+                            {{ c.nome }}
+                        </h8>
+                        <p class="px-4 text-info">{{ c.email }}</p>
+                        <div class="col-12">
+                            {{ c.corpo }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="mbr-section-btn align-center">
+        <a class="btn btn-success display-4"
+           href="{% url 'comentpost' postagem.id %}">Comentar...</a>
+    </div>
+
+</section>
+
+{% endblock %}
